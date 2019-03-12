@@ -1,11 +1,12 @@
-/** 
+/**
  * Written by Gareth Lee, 2004.
  * Revised by Du Huynh, Feb 2005.
  * Revisied by Tim French, 2008
  */
 
 import java.util.Random;
-import CITS2200.Sort;
+import CITS2200.*;
+//import CITS2200.Sort;
 
 public class SortTest
 {
@@ -36,16 +37,16 @@ public class SortTest
       	for (int i = 0; i < a.length; i++)
          	System.out.print(a[i] + " ");
       	System.out.println();
-		
-	Sort s = new Sorter();	
+
+	Sort s = new Sorter();
 	long[] a1 =(long[]) a.clone();
 	long[] a2 =(long[]) a.clone();
 	long[] a3 =(long[]) a.clone();
-	  
+
       	s.insertionSort(a1);
       	s.mergeSort(a2);
 	s.quickSort(a3);
-      
+
       	// print contents of array a after sorting
 	System.out.println("InsertionSort:");
       	for (int i = 0; i < a1.length; i++)
@@ -71,15 +72,15 @@ public class SortTest
    {
       	if (size <= 0)
           	pperr("runMain: argument must be a positive integer.");
-		 
+
       	long a[] = new long[size];
       	Random rand = new Random();
       	for (int i = 0; i < size; i++){
 		 a[i] = rand.nextLong();
-	}	 
+	}
       	Sort s = new Sorter();
 	s.reset();
-	  
+
 	//INSERTIONSORT
 	long[] a1 =(long[]) a.clone();
       	s.insertionSort(a1);
@@ -90,7 +91,7 @@ public class SortTest
 		}
 	System.out.println("Insertionsort used "+s.getCount()+" assignments to sort "+size+ " longs");
 
-		  
+
 	//MERGESORT
 	s.reset();
 	a1 =(long[]) a.clone();
@@ -101,7 +102,7 @@ public class SortTest
 		return;
 		}
 	System.out.println("Mergesort used "+s.getCount()+" assignments to sort "+size+ " longs");
-	  
+
 	//QUICKSORT
 	s.reset();
 	a1 =(long[]) a.clone();
@@ -115,7 +116,7 @@ public class SortTest
    }
 
 
-   
+
    public static void main(String[] args)
    {
       	if (args.length ==0)

@@ -1,4 +1,5 @@
-import CITS2200.Sort;
+import CITS2200.*;
+//import CITS2200.Sort;
 
 /**
 * A class to give a comaprative view of common sorting algorithms.
@@ -37,6 +38,7 @@ public class Sorter implements Sort
 	**/
 	public void insertionSort(long[] a)
   {
+
     		//insert your code here
 	}
 
@@ -50,6 +52,8 @@ public class Sorter implements Sort
   {
 		//insert your code here.
 		//you will also need to provide some private methods
+
+
 	}
 
 	/**
