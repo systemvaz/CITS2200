@@ -38,6 +38,7 @@ public class Sorter implements Sort
 	**/
 	public void insertionSort(long[] a)
   {
+    //insert your code here
     int i = 1;
     while (i < a.length)
     {
@@ -54,7 +55,7 @@ public class Sorter implements Sort
       a[j+1] = x;
       count++;
       i = i + 1;
-    }        //insert your code here
+    }
 	}
 
 
