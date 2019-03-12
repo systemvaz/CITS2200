@@ -68,7 +68,6 @@ public class Sorter implements Sort
 		//insert your code here.
 		//you will also need to provide some private methods
     quickSort(a, 0, a.length -1);
-
 	}
 
   private void quickSort(long[] a, int low, int high)
