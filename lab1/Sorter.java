@@ -38,12 +38,27 @@ public class Sorter implements Sort
 	**/
 	public void insertionSort(long[] a)
   {
+    int i = 1;
+    while (i < a.length)
+    {
+      int j = i - 1;     // element to the left
+      long x = a[i];     // x is temp storage of current element, for swapping
 
-    		//insert your code here
+      while (j >= 0 && a[j] > x)
+      {
+        a[j+1] = a[j];
+        count++;
+        j = j -1;
+      }
+
+      a[j+1] = x;
+      count++;
+      i = i + 1;
+    }        //insert your code here
 	}
 
 
-	/**
+  /**
 	* Executes the quick sort algorithm sorting the argument array.
 	* There is no return as the parameter is to be mutated.
 	* @param a the array of long integers to be sorted
@@ -52,9 +67,47 @@ public class Sorter implements Sort
   {
 		//insert your code here.
 		//you will also need to provide some private methods
-
+    quickSort(a, 0, a.length -1);
 
 	}
+
+  private void quickSort(long[] a, int low, int high)
+  {
+    if (low < high)
+    {
+      int q = partition(a, low, high);
+      quickSort(a, low, q - 1);
+      quickSort(a, q + 1, high);
+    }
+  }
+
+  // Utilising Lomuto partition scheme for quickSort.....
+  private int partition(long a[], int low, int high)
+  {
+    long pivot = a[high];
+    int i = low;
+
+    for (int j = low; j < high; j++)
+    {
+      if (a[j] < pivot)
+      {
+        long x = a[j];
+        a[j] = a[i];
+        count++;
+        a[i] = x;
+        count++;
+        i = i + 1;
+      }
+    }
+
+    long x = a[high];
+    a[high] = a[i];
+    count++;
+    a[i] = x;
+    count++;
+
+    return i;
+  }
 
 	/**
 	* Executes the merge sort algorithm sorting the argument array.
