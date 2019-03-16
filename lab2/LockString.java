@@ -1,11 +1,12 @@
-public class LockInt implements Lock
+public class LockString implements Lock
 {
-  private int combo = 321;
+  private String combo = "321";
   public boolean closed_state = false;
 
   public boolean openLock (int code)
   {
-    if (code == combo)
+    String numtostring = "" + code;
+    if (numtostring.equals(combo))
     {
       closed_state = false;
       return true;
@@ -20,7 +21,8 @@ public class LockInt implements Lock
   {
     if(openLock(code) == true)
     {
-      combo = newcode;
+      String numtostring = "" + newcode;
+      combo = numtostring;
       return true;
     }
     else
