@@ -5,7 +5,7 @@ public class StackBlock implements Stack
   private int first, last;
   private Object[] myStack;
 
-  public void StackBlocks(int s)
+  public void StackBlock(int s)
   {
     first = 0;
     last = -1;
