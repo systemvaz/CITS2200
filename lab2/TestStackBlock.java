@@ -1,13 +1,12 @@
 import java.util.Scanner;
+import CITS2200.*;
+//import CITS2200.*;
 
 public class TestStackBlock
 {
-
   public static void main(String[] args)
   {
     Scanner reader = new Scanner(System.in);
-    StackBlock myStackBlock = new StackBlock();
-
     boolean quit = false;
     while(quit == false)
     {
@@ -23,7 +22,8 @@ public class TestStackBlock
         case 1:
           System.out.println("Enter size: ");
           int size = reader.nextInt();
-          myStackBlock.StackBlock(size);
+          StackBlock myStackBlock = new StackBlock(size);
+          // myStackBlock.StackBlock(size);
           break;
         case 2:
           System.out.println("Int to push: ");
