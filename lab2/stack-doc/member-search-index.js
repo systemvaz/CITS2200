@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"<Unnamed>","c":"StackBlock","l":"examine()"},{"p":"<Unnamed>","c":"StackBlock","l":"isEmpty()"},{"p":"<Unnamed>","c":"StackBlock","l":"isFull()"},{"p":"<Unnamed>","c":"StackBlock","l":"pop()"},{"p":"<Unnamed>","c":"StackBlock","l":"push(Object)","url":"push-java.lang.Object-"},{"p":"<Unnamed>","c":"StackBlock","l":"StackBlock(int)"}]
