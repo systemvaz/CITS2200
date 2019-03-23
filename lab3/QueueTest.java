@@ -29,6 +29,7 @@ public class QueueTest
           System.out.println(myQueue.examine());
           break;
         case 4:
+          reader.close();
           quit = true;
           break;
       }
