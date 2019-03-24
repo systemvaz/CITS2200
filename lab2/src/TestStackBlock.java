@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import CITS2200.*;
-//import CITS2200.*;
 
 public class TestStackBlock
 {
@@ -22,7 +20,7 @@ public class TestStackBlock
       {
         case 1:
           System.out.println("Enter size: ");
-          int size = reader.nextInt();
+          //int size = reader.nextInt();
           // myStackBlock.StackBlock(size);
           break;
         case 2:
@@ -40,6 +38,7 @@ public class TestStackBlock
           quit = true;
       }
     }
+    reader.close();
   }
 
 }
