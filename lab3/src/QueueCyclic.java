@@ -1,5 +1,4 @@
 import CITS2200.*;
-import java.util.Scanner;
 
 public class QueueCyclic implements Queue
 {
