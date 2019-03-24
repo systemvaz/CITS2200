@@ -7,6 +7,7 @@ public class TestStackBlock
   public static void main(String[] args)
   {
     Scanner reader = new Scanner(System.in);
+    StackBlock myStackBlock = new StackBlock(6);
     boolean quit = false;
     while(quit == false)
     {
@@ -22,7 +23,6 @@ public class TestStackBlock
         case 1:
           System.out.println("Enter size: ");
           int size = reader.nextInt();
-          StackBlock myStackBlock = new StackBlock(size);
           // myStackBlock.StackBlock(size);
           break;
         case 2:

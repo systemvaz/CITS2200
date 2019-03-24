@@ -60,4 +60,16 @@ public class QueueCyclic implements Queue
       throw new Underflow("Cannot dequeue an empty queue.");
     }
   }
+  
+	public void printqueue()
+	{
+		System.out.println(" ");
+		for (int i = 0; i < myQueue.length; i++)
+		{
+			System.out.print(myQueue[i] + " | ");
+		}
+		System.out.println("");
+		System.out.println("");
+	}
+
 }
