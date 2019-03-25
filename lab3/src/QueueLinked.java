@@ -38,7 +38,7 @@ public class QueueLinked implements Queue
 		}
 		else
 		{
-			last.successor = new Link(a, null);
+			last.successor = new Link(a, first);
 			last = last.successor;
 		}
 		

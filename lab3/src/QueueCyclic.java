@@ -22,7 +22,7 @@ public class QueueCyclic implements Queue
     return first == (last+2) % myQueue.length;
   }
 
-  public void enqueue(Object a)
+  public void enqueue(Object a) throws Overflow
   {
     if(!isFull())
     {
@@ -35,7 +35,7 @@ public class QueueCyclic implements Queue
     }
   }
 
-  public Object examine()
+  public Object examine() throws Underflow
   {
     if(!isEmpty())
     {
@@ -47,7 +47,7 @@ public class QueueCyclic implements Queue
     }
   }
 
-  public Object dequeue()
+  public Object dequeue() throws Underflow
   {
     if(!isEmpty())
     {
