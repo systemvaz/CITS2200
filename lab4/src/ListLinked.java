@@ -30,23 +30,15 @@ public class ListLinked implements List
 	public Object delete(WindowLinked window) throws OutOfBounds 
 	{
 		Object temp = window.link.item;
-		if(!isBeforeFirst(window))
+		if(!isBeforeFirst(window) && window.link.successor != null)
 		{
-			if(window.link.successor != after)
-			{
-				window.link.item = window.link.successor.item;
-				window.link.successor = window.link.successor.successor;
-			}
-			else
-			{				
-				previous(window);
-				window.link.successor = after;
-			}
+			window.link.item = window.link.successor.item;
+			window.link.successor = window.link.successor.successor;
 			return temp;
 		}
 		else
 		{
-			throw new OutOfBounds("cannot delete from empty list");
+			throw new OutOfBounds("cannot delete from out of bounds");
 		}
 	}
 
