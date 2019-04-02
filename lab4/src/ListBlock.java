@@ -1,4 +1,4 @@
-
+import CITS2200.*;
 
 public class ListBlock 
 {
@@ -10,9 +10,9 @@ public class ListBlock
 	public ListBlock (int size)
 	{
 		block = new Object[size];
+		w = new WindowBlock();
 		before = -1;
 		after = 0;
-		w.index = before;
 	}
 	
 	/** CHECKERS **/
@@ -24,7 +24,7 @@ public class ListBlock
 	
 	public boolean isFull()
 	{
-		return(after == block.length-1);;
+		return(after == block.length-1);
 	}
 	
 	public boolean isBeforeFirst(WindowBlock w)
@@ -49,7 +49,7 @@ public class ListBlock
 		w.index = after;
 	}
 	
-	public void next(WindowBlock w) throws Exception
+	public void next(WindowBlock w) throws Overflow
 	{
 		if (!isAfterLast(w))
 		{
@@ -57,11 +57,11 @@ public class ListBlock
 		}
 		else
 		{
-			throw new Exception("Calling next after list end.");
+			throw new Overflow("Calling next after list end.");
 		}
 	}
 	
-	public void previous(WindowBlock w) throws Exception
+	public void previous(WindowBlock w) throws Underflow
 	{
 		if(!isBeforeFirst(w))
 		{
@@ -69,36 +69,35 @@ public class ListBlock
 		}
 		else
 		{
-			throw new Exception("Calling previous at start of list.");
+			throw new Underflow("Calling previous at start of list.");
 		}
 	}
 	
-	public void insertAfter(Object e, WindowBlock w) throws Exception
+	public void insertAfter(Object e, WindowBlock w) throws Underflow, Overflow
 	{
-		if(!isFull())
+		if(!isAfterLast(w))
 		{
-			if(!isBeforeFirst(w))
+			for(int i = after; i > w.index; i--)
 			{
-				for(int i = after-1; i > w.index; i--)
-				{
-					block[i+1] = block[i];
-				}
-				after++;
-				block[w.index]= e;
-				w.index++;
+				block[i+1] = block[i];
 			}
-			throw new Exception("Inserting before start");
+				after++;
+				w.index++;
+				block[w.index]= e;
 		}
-		throw new Exception("Inserting into full list");
+		else
+		{
+			throw new Overflow("Inserting into full list");	
+		}
 	}
 	
-	public void insertBefore(Object e, WindowBlock w) throws Exception, Exception
+	public void insertBefore(Object e, WindowBlock w) throws Underflow, Overflow
 	{
 		if(!isFull())
 		{
 			if(!isBeforeFirst(w))
 			{
-				for(int i = after-1; i >= w.index; i--)
+				for(int i = after; i >= w.index; i--)
 				{
 					block[i+1] = block[i];
 				}
@@ -109,25 +108,25 @@ public class ListBlock
 			}
 			else
 			{
-				throw new Exception("Inserting before start");
+				throw new Underflow("Inserting before start");
 			}
 		}
 		else
 		{
-			throw new Exception("Inserting in full list");
+			throw new Overflow("Inserting in full list");
 		}
 	}
 	
-	public Object examine(WindowBlock w) throws Exception
+	public Object examine(WindowBlock w) throws Overflow
 	{
 		if(w.index != before || w.index != after)
 		{
-			return e[w.index];
+			return block[w.index];
 		}
-		else throw new Excpetion("some text here");
+		else throw new Overflow("some text here");
 	}
 	
-	public Object replace(Object e, WindowBlock w) throws Exception
+	public Object replace(Object e, WindowBlock w) throws Overflow
 	{
 		if(!isBeforeFirst(w) || !isAfterLast(w))
 		{
@@ -137,11 +136,11 @@ public class ListBlock
 		}
 		else
 		{
-			throw new Exception("some text here");
+			throw new Overflow("some text here");
 		}
 	}
 	
-	public Object delete(WindowBlock w) throws Exception
+	public Object delete(WindowBlock w) throws Overflow
 	{
 		if(w.index != before || w.index != after)
 		{
@@ -151,12 +150,12 @@ public class ListBlock
 				block[i] = block[i+1];
 			}
 			after--;
-			w.index++;
+			//w.index++;
 			return temp;
 		}
 		else
 		{
-			throw new Exception("some text here");
+			throw new Overflow("some text here");
 		}
 	}
 	

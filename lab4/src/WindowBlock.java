@@ -2,7 +2,7 @@
 
 public class WindowBlock 
 {
-	public int index;
+	public int index = -1;
 	
 	public WindowBlock()
 	{
