@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import CITS2200.Link;
+
 public class TestListLinked 
 {
 	public static void main(String[] args)
@@ -18,6 +20,9 @@ public class TestListLinked
 	    System.out.println("6: Next");
 	    System.out.println("7: Previous");
 	    System.out.println("8: QUIT");
+	    System.out.println("9: IsBeforeFirst?");
+	    System.out.println("10: IsAfterLast?");
+	    System.out.println("11: isEmpty");
 	    int option = reader.nextInt();
 	
 	    switch(option)
@@ -41,7 +46,7 @@ public class TestListLinked
 	      case 4:
 		    System.out.println("Int to insert: ");
 		    data = reader.nextInt();
-		    myQueue.replace(data, myQueue.window);
+		    System.out.println(myQueue.replace(data, myQueue.window));
 		    myQueue.printqueue();
 	        break;
 	      case 5:
@@ -60,7 +65,32 @@ public class TestListLinked
 	    	reader.close();
 		    quit = true;
 	    	break;
+	      case 9:
+	    	  System.out.println(myQueue.isBeforeFirst(myQueue.window));
+	    	  break;
+	      case 10:
+	    	  System.out.println(myQueue.isAfterLast(myQueue.window));
+	    	  break;
+	      case 11:
+	    	  System.out.println(myQueue.isEmpty());
+	    	  break;
 	    }
 	  }
 	}
 }
+
+
+
+//public void printqueue()
+//{
+//	Link current = before;
+//	while(current != after.successor)
+//	{
+//		System.out.print(current.item + " | ");
+//		current = current.successor;
+//	}
+//	System.out.println(" ");
+//	System.out.println(" ");
+//}
+//
+

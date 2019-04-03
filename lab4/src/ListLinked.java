@@ -4,36 +4,40 @@ public class ListLinked implements List
 {
 	private Link before;
 	private Link after;
-	public WindowLinked window;
+	public CITS2200.WindowLinked window;
 	
 	public ListLinked()
 	{
 		after = new Link(null, null);
 		before = new Link(null, after);
-		window = new WindowLinked();
+		window = new CITS2200.WindowLinked();
 		beforeFirst(window);
 	}
 
 
-	public void afterLast(WindowLinked window) 
+	public void afterLast(CITS2200.WindowLinked window) 
 	{
 		window.link = after;
 	}
 
 
-	public void beforeFirst(WindowLinked window) 
+	public void beforeFirst(CITS2200.WindowLinked window) 
 	{
 		window.link = before;
 	}
 
 
-	public Object delete(WindowLinked window) throws OutOfBounds 
+	public Object delete(CITS2200.WindowLinked window) throws OutOfBounds 
 	{
-		Object temp = window.link.item;
-		if(!isBeforeFirst(window) && window.link.successor != null)
+		if(!isBeforeFirst(window) && !isAfterLast(window))
 		{
+			Object temp = window.link.item;
 			window.link.item = window.link.successor.item;
 			window.link.successor = window.link.successor.successor;
+			if(window.link.successor == null)
+			{
+				after = window.link;
+			}
 			return temp;
 		}
 		else
@@ -43,30 +47,33 @@ public class ListLinked implements List
 	}
 
 
-	public Object examine(WindowLinked window) throws OutOfBounds 
+	public Object examine(CITS2200.WindowLinked window) throws OutOfBounds 
 	{
-		if(!isBeforeFirst(window))
+		if(!isBeforeFirst(window) && !isAfterLast(window))
 		{
 			return(window.link.item);
 		}
 		else
 		{
-			throw new OutOfBounds("cannot examine from before first position");
+			throw new OutOfBounds("cannot examine from out of bounds");
 		}
 	}
 
-	public void insertAfter(Object e, WindowLinked window) throws OutOfBounds 
+	public void insertAfter(Object e, CITS2200.WindowLinked window) throws OutOfBounds 
 	{
-		window.link.successor = new Link(e, window.link.successor);
-		if(isAfterLast(window))
+		if(!isAfterLast(window))
 		{
-			after = window.link.successor;
+			window.link.successor = new Link(e, window.link.successor);
+			//window.link = window.link.successor;			
 		}
-		window.link = window.link.successor;
+		else
+		{
+			throw new OutOfBounds("cannot insert after the after last position");
+		}
 	}
 
 
-	public void insertBefore(Object e, WindowLinked window) throws OutOfBounds
+	public void insertBefore(Object e, CITS2200.WindowLinked window) throws OutOfBounds
 	{
 		if(!isBeforeFirst(window))
 		{
@@ -85,13 +92,13 @@ public class ListLinked implements List
 	}
 
 
-	public boolean isAfterLast(WindowLinked window)
+	public boolean isAfterLast(CITS2200.WindowLinked window)
 	{
 		return(window.link == after);
 	}
 
 
-	public boolean isBeforeFirst(WindowLinked window)
+	public boolean isBeforeFirst(CITS2200.WindowLinked window)
 	{
 		return(window.link == before);
 	}
@@ -103,7 +110,7 @@ public class ListLinked implements List
 	}
 
 
-	public void next(WindowLinked window) throws OutOfBounds
+	public void next(CITS2200.WindowLinked window) throws OutOfBounds
 	{
 		if(!isAfterLast(window))
 		{
@@ -117,7 +124,7 @@ public class ListLinked implements List
 	}
 
 
-	public void previous(WindowLinked window) throws OutOfBounds
+	public void previous(CITS2200.WindowLinked window) throws OutOfBounds
 	{
 		if(!isBeforeFirst(window))
 		{
@@ -138,9 +145,9 @@ public class ListLinked implements List
 	}
 
 
-	public Object replace(Object e, WindowLinked window) throws OutOfBounds
+	public Object replace(Object e, CITS2200.WindowLinked window) throws OutOfBounds
 	{
-		if(!isBeforeFirst(window))
+		if(!isBeforeFirst(window) && !isAfterLast(window))
 		{
 			Object temp = window.link.item;
 			window.link.item = e;
@@ -148,21 +155,8 @@ public class ListLinked implements List
 		}
 		else
 		{
-			throw new OutOfBounds("calling replace before start of list");
+			throw new OutOfBounds("calling replace outside of bounds");
 		}
 	}
-	
-	public void printqueue()
-	{
-		Link current = before;
-		while(current != after.successor)
-		{
-			System.out.print(current.item + " | ");
-			current = current.successor;
-		}
-		System.out.println(" ");
-		System.out.println(" ");
-	}
-	
-	
+
 }
