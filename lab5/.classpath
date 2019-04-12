@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 	<classpathentry kind="lib" path="C:\Users\syste\OneDrive\Documents\Education\UWA\2019\S1\CITS2200 - Data Structures and Algorithms\CITS2200\CITS2200.jar"/>
 </classpath>
