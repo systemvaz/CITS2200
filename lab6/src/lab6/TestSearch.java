@@ -7,7 +7,7 @@ public class TestSearch
 	{
 		Graph myGraph;
 		SearchImp mySearch = new SearchImp();
-		//myGraph = Graph.randomGraph(8, true, 6);
+		//myGraph = Graph.randomGraph(2000, true, 0.001);
 		myGraph = Graph.readFile("C:\\Users\\syste\\OneDrive\\Documents\\Education\\UWA\\2019\\S1\\CITS2200 - Data Structures and Algorithms\\CITS2200\\lab6\\src\\lab6\\matrix.txt", false, true);
 		int[][] myMatrix = myGraph.getEdgeMatrix();
 		int numVertices = myGraph.getNumberOfVertices();
@@ -21,7 +21,7 @@ public class TestSearch
 			System.out.println();
 		}
 		System.out.println();
-		int[] parents = mySearch.getConnectedTree(myGraph, 0);
+		int[] parents = mySearch.getConnectedTree(myGraph, 3);
 		int[] distance = mySearch.getDistances(myGraph,  0);
 		int[][] time = mySearch.getTimes(myGraph, 0);
 		

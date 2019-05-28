@@ -1,0 +1,212 @@
+import java.util.*;
+import java.io.*;
+
+public class MyProject implements CITS2200Project
+{
+
+	private static Boolean[] visited;
+	private static LinkedList<String> nodeFrom;
+	private static ArrayList<String> index;
+	private static ArrayList<LinkedList<String>> adjacencyList;
+	
+	private static Stack<String> myStack;
+	
+	public MyProject()
+	{
+		adjacencyList = new ArrayList<LinkedList<String>>();
+//		transposedList = new ArrayList<LinkedList<String>>();
+		index = new ArrayList<String>();
+	}
+	
+	
+	public int addVert(String url)
+	{
+		Boolean exists = false;
+		int vertPos;
+		
+		for (LinkedList<String> getVert : adjacencyList)
+		{
+			if (getVert.get(0).equals(url))
+			{
+				vertPos = adjacencyList.indexOf(getVert);
+				exists = true;
+				return vertPos;
+			}
+		}
+		
+		if (exists == false)
+		{
+			LinkedList<String> newVert = new LinkedList<String>();
+			newVert.add(url);
+			adjacencyList.add(newVert);
+			return adjacencyList.indexOf(newVert);
+		}
+		
+		return -1;
+	}
+	
+	
+	@Override
+	public void addEdge(String urlFrom, String urlTo) 
+	{	
+		int vertPos = addVert(urlFrom);
+		addVert(urlTo);
+		
+		nodeFrom = adjacencyList.get(vertPos);
+		nodeFrom.add(urlTo);
+	}
+
+	public void indexVerts()
+	{
+		for (LinkedList<String> getVert : adjacencyList)
+		{
+			index.add(getVert.get(0));
+		}
+	}
+	
+
+	@Override
+	public int getShortestPath(String urlFrom, String urlTo) 
+	{
+		int numVerts = adjacencyList.size();
+		
+		int[] distance = new int[numVerts];
+		Arrays.fill(distance,  -1);
+		
+		Boolean visited[] = new Boolean[numVerts];
+		Arrays.fill(visited, false);
+		
+		Queue<LinkedList<String>> myQueue = new LinkedList<>();
+		
+		indexVerts();
+		int vertPos = index.indexOf(urlFrom);
+		int destination = index.indexOf(urlTo);
+		
+		myQueue.add(adjacencyList.get(vertPos));
+		visited[vertPos] = true;
+		distance[vertPos] = 0;
+		
+		while (!myQueue.isEmpty())
+		{
+			LinkedList<String> currentVert = new LinkedList<String>();
+			currentVert = myQueue.remove();
+			
+			int parentPos = index.indexOf(currentVert.get(0));
+			
+			for (String check : currentVert)
+			{					
+				vertPos = index.indexOf(check);
+				
+				if (visited[vertPos] == false)
+				{
+					myQueue.add(adjacencyList.get(vertPos));
+					visited[vertPos] = true;
+					distance[vertPos] = distance[parentPos] + 1;
+				}
+				
+				if (check.contentEquals(urlTo))
+				{
+					break;
+				}				
+			}
+		}
+		
+		return distance[destination];
+	}
+
+	@Override
+	public String[] getCenters() 
+	{
+		
+		return null;
+	}
+
+	@Override
+	public String[][] getStronglyConnectedComponents() 
+	{
+		int numVerts = adjacencyList.size();
+		
+		Boolean visited[] = new Boolean[numVerts];
+		Arrays.fill(visited, false);
+		
+		Stack<String> myStack = new Stack<String>();
+	
+		indexVerts();
+		
+		//Perform first DFS, creating stack of vertices ordered in finishing times
+		for (int i = 0; i < numVerts; i++)
+		{
+			if (!visited[i])
+			{				
+				fillStackDFS(i, visited, myStack);
+			}
+		}
+		
+		//Transpose the graph
+		transposeGraph();
+		
+		
+		return null;
+	}
+	
+	public void fillStackDFS(int vert, Boolean[] visited, Stack<String> myStack)
+	{
+		
+		LinkedList<String> currentVert = new LinkedList<String>();
+		currentVert = adjacencyList.get(vert);
+		visited[vert] = true;
+		
+		for (String check : currentVert)
+		{
+			int vertPos = index.indexOf(check);
+			
+			if (!visited[vertPos])
+			{
+				fillStackDFS(vertPos, visited, myStack);
+			}
+		}
+		
+		myStack.add(index.get(vert));
+	}
+	
+	public void transposeGraph()
+	{
+		
+	}
+	
+	
+
+	@Override
+	public String[] getHamiltonianPath() 
+	{
+		
+		return null;
+	}
+	
+	
+	
+	
+	//--------------------------------------------------------------------
+	//--------------------------------------------------------------------
+	
+	public void printVerts()
+	{
+		System.out.println(adjacencyList.size());
+		for (LinkedList<String> getVert : adjacencyList)
+		{
+			for (String vert : getVert)
+			{
+				System.out.print(vert + " |  ");
+			}
+			
+			System.out.println();
+		}
+		
+		indexVerts();
+		for (int i = 0; i < index.size(); i++)
+		{
+			System.out.println(index.get(i));
+		}
+	}
+
+}
